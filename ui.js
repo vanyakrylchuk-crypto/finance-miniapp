@@ -25,7 +25,20 @@ function renderHome() {
   document.getElementById('monthIncome').textContent = getMonthSum('income').toFixed(2);
   document.getElementById('monthExpense').textContent = getMonthSum('expense').toFixed(2);
 
-  // Счета (горизонтальная строка)
+  // Расходы (категории) — сверху
+  const expEl = document.getElementById('expenseCategories');
+  expEl.innerHTML = '';
+  expenseCategories.forEach(cat => {
+    const div = document.createElement('div');
+    div.className = 'category-item';
+    div.dataset.categoryId = cat.id;
+    div.dataset.dropType = 'expense-category';
+    div.dataset.editType = 'expense-category';
+    div.innerHTML = `<span class="cat-icon">${cat.icon}</span>${cat.name}`;
+    expEl.appendChild(div);
+  });
+
+  // Счета (центр)
   const accountsEl = document.getElementById('accountsList');
   accountsEl.innerHTML = '';
   accounts.forEach(acc => {
@@ -46,7 +59,7 @@ function renderHome() {
     accountsEl.appendChild(div);
   });
 
-  // Категории доходов
+  // Доходы (категории) — снизу
   const incEl = document.getElementById('incomeCategories');
   incEl.innerHTML = '';
   incomeCategories.forEach(cat => {
@@ -57,18 +70,5 @@ function renderHome() {
     div.dataset.editType = 'income-category';
     div.innerHTML = `<span class="cat-icon">${cat.icon}</span>${cat.name}`;
     incEl.appendChild(div);
-  });
-
-  // Категории расходов
-  const expEl = document.getElementById('expenseCategories');
-  expEl.innerHTML = '';
-  expenseCategories.forEach(cat => {
-    const div = document.createElement('div');
-    div.className = 'category-item';
-    div.dataset.categoryId = cat.id;
-    div.dataset.dropType = 'expense-category';
-    div.dataset.editType = 'expense-category';
-    div.innerHTML = `<span class="cat-icon">${cat.icon}</span>${cat.name}`;
-    expEl.appendChild(div);
   });
 }

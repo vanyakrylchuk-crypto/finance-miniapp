@@ -24,22 +24,23 @@
             </div>
         </div>
 
+        <!-- Новый порядок: Расходы (выше), Счета (центр), Доходы (ниже) -->
+        <h3 class="section-title">Расходы <button class="icon-btn" data-add="expense-category">+</button></h3>
+        <div class="category-grid" id="expenseCategories"></div>
+
         <h3 class="section-title">Счета <button class="icon-btn" data-add="account">+</button></h3>
         <div class="accounts-row" id="accountsList"></div>
 
         <h3 class="section-title">Доходы <button class="icon-btn" data-add="income-category">+</button></h3>
         <div class="category-grid" id="incomeCategories"></div>
-
-        <h3 class="section-title">Расходы <button class="icon-btn" data-add="expense-category">+</button></h3>
-        <div class="category-grid" id="expenseCategories"></div>
     </div>
 
-    <!-- Экраны-заглушки -->
+    <!-- Остальные экраны -->
     <div id="screen-history" class="screen"><h2>История</h2><p>Здесь будет история операций</p></div>
     <div id="screen-analytics" class="screen"><h2>Аналитика</h2><p>Здесь будут графики</p></div>
     <div id="screen-settings" class="screen"><h2>Настройки</h2><p>Здесь можно будет всё настроить</p></div>
 
-    <!-- Тач-бар -->
+    <!-- Тач-бар как на iPhone -->
     <div class="tab-bar">
         <button class="tab active" data-screen="home">🏠</button>
         <button class="tab" data-screen="history">📋</button>
@@ -68,6 +69,7 @@
         <div class="modal-content">
             <h3 id="editModalTitle">Редактировать</h3>
             <input type="text" id="editName" placeholder="Название">
+            <input type="text" id="editIcon" placeholder="Эмодзи" maxlength="2" style="font-size:24px; text-align:center;">
             <div class="modal-buttons">
                 <button id="editSave">Сохранить</button>
                 <button id="editDelete" class="danger-btn">Удалить</button>
@@ -76,12 +78,23 @@
         </div>
     </div>
 
-    <!-- Подключаем скрипты -->
+    <!-- Модальное окно выбора эмодзи -->
+    <div class="modal" id="emojiModal">
+        <div class="modal-content emoji-picker-content">
+            <h3>Выберите иконку</h3>
+            <div id="emojiGrid" class="emoji-grid"></div>
+            <button id="emojiCancel" style="margin-top:12px;">Отмена</button>
+        </div>
+        <input type="hidden" id="emojiTarget" />
+    </div>
+
+    <!-- Скрипты -->
     <script src="storage.js"></script>
     <script src="data.js"></script>
     <script src="ui.js"></script>
     <script src="dragdrop.js"></script>
     <script src="modal.js"></script>
+    <script src="emoji-picker.js"></script>
     <script src="edit.js"></script>
     <script src="app.js"></script>
 </body>
