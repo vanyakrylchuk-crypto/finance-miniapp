@@ -4,32 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Мои финансы</title>
-    <!-- Подключаем стили -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>💰 Мои финансы</h1>
-        <div class="balance" id="balanceDisplay">Баланс: <span id="balanceValue">0</span> ₽</div>
-
-        <label>Сумма</label>
-        <input type="number" id="amountInput" placeholder="0.00" step="0.01" min="0.01">
-
-        <label>Тип операции</label>
-        <div class="type-switch">
-            <button id="expenseBtn" class="active">Расход</button>
-            <button id="incomeBtn">Доход</button>
+    <!-- Экраны приложения -->
+    <div id="screen-home" class="screen active">
+        <!-- Баланс -->
+        <div class="balance" id="balanceDisplay">
+            <span id="balanceValue">0</span> ₽
         </div>
-
-        <label>Категория</label>
-        <select id="categorySelect"></select>
-
-        <button class="add-btn" id="addBtn">➕ Добавить запись</button>
-
-        <ul id="transactionsList"></ul>
+        <!-- Общие суммы за месяц -->
+        <div class="month-summary">
+            <div class="summary-item income-bg">
+                <span>Доходы</span>
+                <span id="monthIncome">0</span> ₽
+            </div>
+            <div class="summary-item expense-bg">
+                <span>Расходы</span>
+                <span id="monthExpense">0</span> ₽
+            </div>
+        </div>
+        <!-- Категории доходов (перетягиваются на счета) -->
+        <h3>Доходы</h3>
+        <div class="category-grid" id="incomeCategories"></div>
+        <!-- Категории расходов (принимают счета) -->
+        <h3>Расходы</h3>
+        <div class="category-grid" id="expenseCategories"></div>
+        <!-- Счета (принимают доходы, сами перетягиваются для расходов) -->
+        <h3>Счета</h3>
+        <div class="accounts-list" id="accountsList"></div>
     </div>
 
-    <!-- Основной скрипт приложения -->
+    <div id="screen-history" class="screen">
+        <h2>История</h2>
+        <p>Здесь будет история операций</p>
+    </div>
+    <div id="screen-analytics" class="screen">
+        <h2>Аналитика</h2>
+        <p>Здесь будут графики и отчёты</p>
+    </div>
+    <div id="screen-settings" class="screen">
+        <h2>Настройки</h2>
+        <p>Здесь можно будет редактировать счета и категории</p>
+    </div>
+
+    <!-- Тач-бар -->
+    <div class="tab-bar">
+        <button class="tab active" data-screen="home">🏠 Главная</button>
+        <button class="tab" data-screen="history">📋 История</button>
+        <button class="tab" data-screen="analytics">📊 Аналитика</button>
+        <button class="tab" data-screen="settings">⚙️ Настройки</button>
+    </div>
+
+    <!-- Модальное окно для ввода суммы и даты -->
+    <div class="modal" id="transactionModal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Новая операция</h3>
+            <label>Сумма</label>
+            <input type="number" id="modalAmount" placeholder="0.00" step="0.01" min="0.01">
+            <label>Дата</label>
+            <input type="date" id="modalDate">
+            <div class="modal-buttons">
+                <button id="modalAdd">Добавить</button>
+                <button id="modalCancel">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drag-клон (будет создаваться динамически) -->
+    <div id="dragClone" style="display:none; position:fixed; pointer-events:none; z-index:999; opacity:0.8;"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
